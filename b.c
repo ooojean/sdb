@@ -44,7 +44,7 @@ ppmimage *ppm_readimage(const char *filename){
 	}
 
 	uint8_t bytes_per_value= (result->maxval > 256 ? 2 : 1);
-	const int value_per_pixel = 3;
+	const int values_per_pixel = 3;
 
 	uint8_t *pixeldata = rawdata + offset + 1;
 
@@ -52,7 +52,7 @@ ppmimage *ppm_readimage(const char *filename){
 	for (int y=0; y < result->rows; y++){
 		result->pixels[y] = calloc(result->cols, sizeof(pixel));
 		for (int x=0; x < result->cols; x++) {
-			uint8_t *pixel_start = pixeldata + (y * result->cols * value_per_pixel * bytes_per_value) + (x * value_per_pixel * bytes_per_value);
+			uint8_t *pixel_start = pixeldata + (y * result->cols * values_per_pixel * bytes_per_value) + (x * values_per_pixel * bytes_per_value);
 
 			if (bytes_per_value == 1){
 				result->pixels[y][x].r = pixel_start[0];
